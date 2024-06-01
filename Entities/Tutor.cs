@@ -1,8 +1,10 @@
+using SimpleDapperApp.Entities;
+
 namespace SimpleDapperApp.Models
 {
-  public class Tutor
+  public class Tutor : BaseEntity
   {
-    public Tutor(string name, string address, string city)
+    public Tutor(string name, string address, string city, int? id = null) : base(id)
     {
       Name = name;
       Address = address;
