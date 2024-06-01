@@ -22,6 +22,12 @@ namespace SimpleDapperApp
         case 2:
               Console.WriteLine(tutorService.InsertTutor());
               break;
+        case 3:
+              Console.WriteLine(tutorService.UpdateTutor());
+              break;
+        case 4:
+              Console.WriteLine(tutorService.DeleteTutor());
+              break;                            
         default: 
               Console.WriteLine("ERROR - INPUTTED VALUE NOT ACCEPTED");
               break;
@@ -54,18 +60,20 @@ namespace SimpleDapperApp
       Console.WriteLine("--------------------------- PLEASE CHOOSE YOUR OPTION ---------------------------");
       Console.WriteLine("1 - Get Into Person");
       Console.WriteLine("2 - Get Into Pets");
-      Console.Clear();
 
       int menuSelectedOption = Convert.ToInt32(Console.ReadLine());
 
       switch (menuSelectedOption) {
         case 1: 
+              Console.Clear();
               SelectTutors();
               break;
         case 2:
+              Console.Clear();
               SelectPets();
               break;
         default: 
+              Console.Clear();
               Console.WriteLine("ERROR - INPUTTED VALUE NOT ACCEPTED");
               break;
       }

@@ -10,6 +10,9 @@ namespace SimpleDapperApp.Services {
     private readonly DatabaseConnection<Tutor> connectionDatabase;
     private string GetTutorsListSqlFile { get; set; } = "get-tutors-list";
     private string InsertTutorEntitySqlFile { get; set; } = "add-tutor";
+    private string UpdateTutorEntitySqlFile { get; set; } = "update-tutor";
+    private string DeleteTutorEntitySqlFile { get; set; } = "delete-tutor";
+    private string GetOneTutorByNameEntitySqlFile { get; set; } = "get-one-tutor-by-name";
     
     public IEnumerable<Tutor> GetTutorsList () {
       var personsList = this.connectionDatabase.SelectRowsFromDatabase(this.GetTutorsListSqlFile);
@@ -24,34 +27,81 @@ namespace SimpleDapperApp.Services {
     public string InsertTutor () {
       Tutor TutorToInput = this.GetInputtedTutor();
 
-      var insertResult = this.connectionDatabase.ExecuteParameterizedInDatabase(this.InsertTutorEntitySqlFile, new {
+      var InsertResult = this.connectionDatabase.ExecuteParameterizedInDatabase(this.InsertTutorEntitySqlFile, new {
         Name = TutorToInput.Name,
         Address = TutorToInput.Address,
         City = TutorToInput.City
       });
 
-      if (insertResult == 0) {
+      if (InsertResult == 0) {
         return "No tutor was inserted";
       }
 
       return "The tutor was inserted successfully!";
     }
+    public string UpdateTutor () {
+      Console.WriteLine("Type the tutor's name to be updated");
+      string ToBeUpdatedTutorName = Console.ReadLine().Trim();
 
-    public void DeletePersons () {}
+      var ToBeUpdatedTutor = this.connectionDatabase.GetOneFromDatabase(this.GetOneTutorByNameEntitySqlFile, new {
+        Name = ToBeUpdatedTutorName
+      });
 
-    public void UpdatePersons () {}
+      if (ToBeUpdatedTutor == null) {
+        return "There's no tutor with the searched name";
+      }
+
+      Tutor UpdatedTutorInformations = this.GetInputtedTutor();
+      UpdatedTutorInformations.Id = ToBeUpdatedTutor.Id;
+
+      int UpdateResult = this.connectionDatabase.ExecuteParameterizedInDatabase(this.UpdateTutorEntitySqlFile, new {
+        Name = UpdatedTutorInformations.Name,
+        Address = UpdatedTutorInformations.Address,
+        City = UpdatedTutorInformations.City,
+        Id = UpdatedTutorInformations.Id
+      });
+
+      if (UpdateResult == 0) {
+        return "No tutor was updated";
+      }
+
+      return "The tutor was updated successfully!";
+    }
+
+    public string DeleteTutor () {
+      Console.WriteLine("Type the tutor's name to be deleted");
+      string ToBeDeletedTutorName = Console.ReadLine().Trim();
+
+      var ToBeDeletedTutor = this.connectionDatabase.GetOneFromDatabase(this.GetOneTutorByNameEntitySqlFile, new {
+        Name = ToBeDeletedTutorName
+      });
+
+      if (ToBeDeletedTutor == null) {
+        return "There's no tutor with the searched name";
+      }
+
+      int DeletionResult = this.connectionDatabase.ExecuteParameterizedInDatabase(this.DeleteTutorEntitySqlFile, new {
+        Id = ToBeDeletedTutor.Id
+      });
+
+      if (DeletionResult == 0) {
+        return "No tutor was deleted";
+      }
+
+      return "The tutor was deleted successfully!";
+    }
 
     private Tutor GetInputtedTutor () {
       Console.WriteLine("Type the tutor name");
-      string TutorName = Console.ReadLine();
+      string TutorName = Console.ReadLine().Trim();
       Console.Clear();
 
       Console.WriteLine("Type the tutor address");
-      string TutorAddress = Console.ReadLine();
+      string TutorAddress = Console.ReadLine().Trim();
       Console.Clear();
 
       Console.WriteLine("Type the tutor city");
-      string TutorCity = Console.ReadLine();
+      string TutorCity = Console.ReadLine().Trim();
       Console.Clear();
 
       return new Tutor(
