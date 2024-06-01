@@ -39,6 +39,12 @@ namespace SimpleDapperApp
           return items;
         }
 
+        public T? GetOneFromDatabase(string SqlFile, object SqlParameters) {
+          var item = this.DapperMySqlConnection.QueryFirstOrDefault<T>(GetSqlFileContent(SqlFile), SqlParameters);
+          
+          return item;
+        }
+
         public int ExecuteParameterizedInDatabase(string SqlFile, object SqlParameters)
         {
           int affectedRows = this.DapperMySqlConnection.Execute(GetSqlFileContent(SqlFile), SqlParameters);
