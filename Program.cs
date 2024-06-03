@@ -5,55 +5,66 @@ namespace SimpleDapperApp
   class Program
   {
 
-    static void SelectTutors() {
+    static void SelectTutors()
+    {
       var tutorService = new TutorService();
       Console.WriteLine("--------------------------- PLEASE CHOOSE YOUR OPTION ---------------------------");
       Console.WriteLine("1 - Get Tutors List");
       Console.WriteLine("2 - Insert a Tutor");
       Console.WriteLine("3 - Update a Tutor");
       Console.WriteLine("4 - Delete a Tutor");
-      
+
       int userOptionChoosed = Convert.ToInt32(Console.ReadLine());
 
-      switch (userOptionChoosed) {
-        case 1: 
-              tutorService.GetTutorsList();
-              break;
+      switch (userOptionChoosed)
+      {
+        case 1:
+          tutorService.GetTutorsList();
+          break;
         case 2:
-              Console.WriteLine(tutorService.InsertTutor());
-              break;
+          Console.WriteLine(tutorService.InsertTutor());
+          break;
         case 3:
-              Console.WriteLine(tutorService.UpdateTutor());
-              break;
+          Console.WriteLine(tutorService.UpdateTutor());
+          break;
         case 4:
-              Console.WriteLine(tutorService.DeleteTutor());
-              break;                            
-        default: 
-              Console.WriteLine("ERROR - INPUTTED VALUE NOT ACCEPTED");
-              break;
+          Console.WriteLine(tutorService.DeleteTutor());
+          break;
+        default:
+          Console.WriteLine("ERROR - INPUTTED VALUE NOT ACCEPTED");
+          break;
       }
     }
 
-    static void SelectPets() {
+    static void SelectPets()
+    {
+      var petsService = new PetsService();
       Console.WriteLine("--------------------------- PLEASE CHOOSE YOUR OPTION ---------------------------");
-      Console.WriteLine("1 - Get Persons List");
+      Console.WriteLine("1 - Get Pets List");
       Console.WriteLine("2 - Insert a Pet");
       Console.WriteLine("3 - Update a Pet");
       Console.WriteLine("4 - Delete a Pet");
-      
+
       int userOptionChoosed = Convert.ToInt32(Console.ReadLine());
 
-      // switch (userOptionChoosed) {
-      //   case 1: 
-      //         GetRows(connection, "SELECT * FROM Persons");
-      //         break;
-      //   case 2:
-      //         InsertRow(insertParams);
-      //         break;
-      //   default: 
-      //         Console.WriteLine("ERROR - INPUTTED VALUE NOT ACCEPTED");
-      //         break;
-      // }
+      switch (userOptionChoosed)
+      {
+        case 1:
+          petsService.GetPetsList();
+          break;
+        case 2:
+          Console.WriteLine(petsService.InsertPet());
+          break;
+        case 3:
+        //       Console.WriteLine(petsService.UpdatePet());
+        //       break;
+        // case 4:
+        //       Console.WriteLine(petsService.DeletePet());
+        //       break;                            
+        default:
+          Console.WriteLine("ERROR - INPUTTED VALUE NOT ACCEPTED");
+          break;
+      }
     }
     static void Main(string[] args)
     {
@@ -63,19 +74,20 @@ namespace SimpleDapperApp
 
       int menuSelectedOption = Convert.ToInt32(Console.ReadLine());
 
-      switch (menuSelectedOption) {
-        case 1: 
-              Console.Clear();
-              SelectTutors();
-              break;
+      switch (menuSelectedOption)
+      {
+        case 1:
+          Console.Clear();
+          SelectTutors();
+          break;
         case 2:
-              Console.Clear();
-              SelectPets();
-              break;
-        default: 
-              Console.Clear();
-              Console.WriteLine("ERROR - INPUTTED VALUE NOT ACCEPTED");
-              break;
+          Console.Clear();
+          SelectPets();
+          break;
+        default:
+          Console.Clear();
+          Console.WriteLine("ERROR - INPUTTED VALUE NOT ACCEPTED");
+          break;
       }
     }
   }

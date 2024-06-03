@@ -16,7 +16,8 @@ namespace SimpleDapperApp.Models
     public string City { get; set; }
 
 
-    public override string ToString() {
+    public override string ToString()
+    {
       return $"Name: {Name} | Address: {Address} | City: {City}";
     }
   }

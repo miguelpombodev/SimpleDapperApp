@@ -1,0 +1,9 @@
+SELECT 
+  Id,
+  PersonId,
+  Name,
+  PetTypeId,
+  Age,
+  Color
+FROM 
+DapperDB.Pets;
