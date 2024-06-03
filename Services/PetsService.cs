@@ -1,6 +1,7 @@
 using SimpleDapperApp.DTOs;
 using SimpleDapperApp.Entities;
 using SimpleDapperApp.Models;
+using SimpleDapperApp.Utils;
 
 namespace SimpleDapperApp.Services
 {
@@ -93,11 +94,11 @@ namespace SimpleDapperApp.Services
       Console.Clear();
 
       return new CreatePetDTO(
-        PetName,
-        PetTutorName,
-        PetType,
+        StringUtils.CapitalizeString(PetName),
+        StringUtils.CapitalizeString(PetTutorName),
+        StringUtils.CapitalizeString(PetType),
         PetAge,
-        PetColor
+        StringUtils.CapitalizeString(PetColor)
       );
     }
   }

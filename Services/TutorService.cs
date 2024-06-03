@@ -1,5 +1,6 @@
 using Org.BouncyCastle.Asn1.Misc;
 using SimpleDapperApp.Models;
+using SimpleDapperApp.Utils;
 
 namespace SimpleDapperApp.Services
 {
@@ -66,7 +67,7 @@ namespace SimpleDapperApp.Services
     public string UpdateTutor()
     {
       Console.WriteLine("Type the tutor's name to be updated");
-      string ToBeUpdatedTutorName = Console.ReadLine().Trim();
+      string ToBeUpdatedTutorName = StringUtils.CapitalizeString(Console.ReadLine().Trim());
 
       var ToBeUpdatedTutor = this.GetOneTutorByName(ToBeUpdatedTutorName);
 
@@ -97,7 +98,7 @@ namespace SimpleDapperApp.Services
     public string DeleteTutor()
     {
       Console.WriteLine("Type the tutor's name to be deleted");
-      string ToBeDeletedTutorName = Console.ReadLine().Trim();
+      string ToBeDeletedTutorName = StringUtils.CapitalizeString(Console.ReadLine().Trim());
 
       var ToBeDeletedTutor = this.GetOneTutorByName(ToBeDeletedTutorName);
 
@@ -134,9 +135,9 @@ namespace SimpleDapperApp.Services
       Console.Clear();
 
       return new Tutor(
-        TutorName,
+        StringUtils.CapitalizeString(TutorName),
         TutorAddress,
-        TutorCity
+        StringUtils.CapitalizeString(TutorCity)
       );
     }
   }
